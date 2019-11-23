@@ -6,28 +6,34 @@ import numpy
 def noteToFrequency(note):
         return 27.5 * ((2.0 ** (1.0/12.0)) ** float(note-1))
 
-def playNote(note, duration):
+def playNotes(notes):
     p = pyaudio.PyAudio()
     volume = 0.5
     sampleRate = 44100
-    frequency = noteToFrequency(note)
-    print(frequency)
-    samples = (numpy.sin(2*numpy.pi*numpy.arange(sampleRate*duration)*frequency/sampleRate)).astype(numpy.float32)
-    stream = p.open(format=pyaudio.paFloat32,
-                    channels=1,
-                    rate=sampleRate,
-                    output=True)
-    stream.write(volume*samples)
+
+    for note in notes:
+        frequency = noteToFrequency(note[0])
+        print(frequency)
+        samples = (numpy.sin(2*numpy.pi*numpy.arange(sampleRate*note[1])*frequency/sampleRate)).astype(numpy.float32)
+        stream = p.open(format=pyaudio.paFloat32,
+                        channels=1,
+                        rate=sampleRate,
+                        output=True)
+        stream.write(volume*samples)
     stream.stop_stream()
     stream.close()
     p.terminate()
 
-playNote(56, 1)
-playNote(55, 1)
-playNote(56, 1)
-playNote(55, 1)
-playNote(56, 1)
-playNote(51, 1)
-playNote(54, 1)
-playNote(52, 1)
-playNote(49, 3)
+notes = [
+    [56, 1],
+    [55, 1],
+    [56, 1],
+    [55, 1],
+    [56, 1],
+    [51, 1],
+    [54, 1],
+    [52, 1],
+    [49, 3]
+]
+
+playNotes(notes)
