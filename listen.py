@@ -3,6 +3,7 @@
 
 import subprocess
 import sys
+from pprint import pprint
 
 # List all ports on which input devices are streaming
 inputs = subprocess.Popen(['aconnect', '-i'], stdout=subprocess.PIPE)
@@ -23,4 +24,5 @@ port = output.communicate()[0].strip() + '0';
 # Let's listen on the port
 stream = subprocess.Popen(['aseqdump', '-p', port], stdout=subprocess.PIPE)
 for c in iter(lambda: stream.stdout.read(1), ''):
+    pprint(c)
     sys.stdout.write(c)
