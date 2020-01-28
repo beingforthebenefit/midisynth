@@ -1,0 +1,6 @@
+subprocess
+sys
+pprint
+pyaudio
+numpy
+tkinter
