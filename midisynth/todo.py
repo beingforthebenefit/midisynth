@@ -1,4 +1,4 @@
-from Tkinter import *
+from tkinter import *
 window = Tk()
 label = Label(window, text="Which device would you like to use?", font = ('Veranda', 12))
 label.grid(column = 0, row = 0)
